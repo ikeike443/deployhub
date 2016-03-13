@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+[ -z "$DEBUG" ] || set -x
+
+script/setup
+
+echo "===> Running tests..."
+bundle exec rspec specs/* --format documentation
