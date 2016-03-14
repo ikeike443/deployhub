@@ -32,10 +32,23 @@ class DeploymentTutorial < Sinatra::Base
       process_deployment
     when "deployment_status"
       update_deployment_status
+    when "issue_comment"
+      pull_request = @client.pull_request(Octokit::Repository.new(@payload["repository"]["full_name"]), @payload["issue"]["number"])
+      check_comment(@payload["comment"]["body"], @payload["repository"]["full_name"], pull_request["head"]["sha"])
     end
   end
 
   helpers do
+    def check_comment(body, full_name, p_sha)
+      if body =~ /.*OK.*/
+        @client.create_status(full_name, p_sha, "success", {:context => "Manager Approval", :target_url => @payload["comment"]["html_url"], :description => "マネージャーがOKといえばマージ可能"})
+      elsif body =~ /.*NG.*/
+        @client.create_status(full_name, p_sha, "failure", {:context => "Manager Approval", :target_url => @payload["comment"]["html_url"], :description => "マネージャーがOKといえばマージ可能"})
+      end
+
+      "Status returned!"
+    end
+
     def start_deployment(pull_request)
       user = pull_request['user']['login']
       payload = JSON.generate(:environment => 'production', :deploy_user => user)
