@@ -1,1 +1,1 @@
-web: script/server
+web: bundle exec rackup
