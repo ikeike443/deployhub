@@ -63,8 +63,8 @@ class DeploymentTutorial < Sinatra::Base
       puts "Processing '#{@payload['deployment']['description']}' for #{payload['deploy_user']} to #{payload['environment']}"
       sleep 2 # simulate work
       @client.create_deployment_status("repos/#{@payload['repository']['full_name']}/deployments/#{@payload['deployment']['id']}", 'pending')
-      sleep 2 # simulate work
-      @client.create_deployment_status("repos/#{@payload['repository']['full_name']}/deployments/#{@payload['deployment']['id']}", 'success')
+      # sleep 2 # simulate work
+      # @client.create_deployment_status("repos/#{@payload['repository']['full_name']}/deployments/#{@payload['deployment']['id']}", 'success')
 
       "Deployment was processed!"
     end
