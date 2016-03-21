@@ -1,5 +1,5 @@
 #!/bin/sh
 
 script/setup
-
-bundle exec rackup
+#bundle exec rackup 
+bundle exec unicorn -c unicorn.rb -D $1

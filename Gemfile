@@ -5,7 +5,9 @@ ruby "2.2.4"
 
 gem "json", "1.8.3"
 gem "sinatra", "1.4.5"
+gem "sinatra-contrib"
 gem "octokit",     '~> 3.0'
+gem "unicorn"
 
 group :test do
   gem "rspec", "~> 3.4"
