@@ -17,7 +17,7 @@ class DeploymentTutorial < Sinatra::Base
   end
 
   get '/' do
-    "Hello!!! I'm a deploy server :-)"
+    "Hello!!! I'm a deploy server :-) from mocloud."
   end
 
   post '/event_handler' do
